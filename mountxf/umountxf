@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -eo pipefail
+lsblk
+read -rp "Which disk partition: " disk_choice
+udiskie-mount /dev/"$disk_choice" 
+

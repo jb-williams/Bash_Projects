@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Just a Small script to output from clipboard
+set -eo pipefail
+
+/usr/bin/xclip -selection c -o

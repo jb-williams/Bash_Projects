@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+if [ $# -ne 1 ]; then
+    /usr/bin/echo "Need 1 argument (brup, brwn, brcur, brmx)"
+    exit 1;
+fi
+
+basedir="/sys/class/backlight/"
+handler=$basedir$(ls $basedir)"/"
+current_bright=$(cat "$handler""brightness")
+max_bright=$(cat "$handler""max_brightness")
+min_bright=30
+#min_bright=200
+set_inc=20
+#set_inc=500
+#check_min=$(($max_bright * 0.95))
+#min_bright=$(($max_bright - $check_min))
+#set_inc=$(($max_bright * 0.1))
+
+if [[ $current_bright -ge $min_bright && $current_bright -le $max_bright ]]; then
+    if [[ "$1" = 'brup' && $current_bright -le $max_bright ]]; then
+            /usr/bin/echo "Brightness Up"
+            new_bright=$(($current_bright + $set_inc))
+            if [[ $new_bright -ge $max_bright ]]; then
+                /usr/bin/echo  "$max_bright" > $handler"brightness"
+                /usr/bin/echo "Brightness $new_bright"
+                /usr/bin/echo "$(( $current_bright * 100 / $max_bright ))%"
+                /usr/bin/notify-send -t 3500 "$(( $current_bright * 100 / $max_bright ))%"
+            else
+                /usr/bin/echo $new_bright > "$handler""brightness"
+                /usr/bin/echo "Brightness $new_bright"
+                /usr/bin/echo "$(( $new_bright * 100 / $max_bright ))%"
+                /usr/bin/notify-send -t 3500 "$(( $new_bright * 100 / $max_bright ))%"
+            fi
+    elif [[ "$1" = 'brwn' && $current_bright -ge $min_bright ]]; then
+            /usr/bin/echo "Brightness Down"
+            new_bright=$(($current_bright - $set_inc))
+            if [[ $new_bright -le $min_bright ]]; then
+                /usr/bin/echo $min_bright > "$handler""brightness"
+                /usr/bin/echo "Brightness $new_bright"
+                /usr/bin/echo "$(( $current_bright * 100 / $max_bright ))%"
+                /usr/bin/notify-send -t 3500 "$(( $current_bright * 100 / $max_bright ))%"
+            else
+                /usr/bin/echo $new_bright > "$handler""brightness"
+                /usr/bin/echo "Brightness $new_bright"
+                /usr/bin/echo "$(( $new_bright * 100 / $max_bright ))%"
+                /usr/bin/notify-send -t 3500 "$(( $new_bright * 100 / $max_bright ))%"
+            fi
+    elif [[ "$1" = 'brcur' ]]; then
+            /usr/bin/echo "Current Brightness $current_bright"
+            /usr/bin/echo "$(( ($current_bright * 100) / $max_bright ))%"
+            /usr/bin/notify-send -t 3500 "$(( $current_bright * 100 / $max_bright ))%"
+    elif [[ "$1" = 'brmx' ]]; then
+            /usr/bin/echo "Max Brightness $max_bright"
+            /usr/bin/echo "$max_bright" > "$handler""brightness"
+            /usr/bin/notify-send -t 3500 "100%"
+    fi
+fi  

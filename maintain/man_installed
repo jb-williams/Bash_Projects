@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+apt list --installed | grep -v "automatic" | awk -F"/" '{print $1}' > /home/"$USER"/.local/share/man_installed.txt
+

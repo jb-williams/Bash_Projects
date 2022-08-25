@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#   _____  _____  _____
+set -eo pipefail
+
+options=("alacritty
+bash_aliases
+bash_personal
+cwmrc
+dunstrc
+mybar.sh
+sxhkdrc
+vimrc
+Xresources
+xscreensaver
+xsession
+quit")
+
+choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first)"
+#choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
+
+case "$choice" in
+	alacritty)
+		choice="$HOME/.config/alacritty/alacritty.yml"
+        vim "$choice"
+		;;
+	bash_aliases)
+        choice="$HOME/.bash_aliases"
+        vim "$choice"
+		;;
+	bash_personal)
+        choice="$HOME/.bash_personal"
+        vim "$choice"
+		;;
+	cwmrc)
+        choice="$HOME/.cwmrc"
+        vim "$choice"
+		;;
+	dunstrc)
+        choice="$HOME/dunst/dunstrc"
+        vim "$choice"
+		;;
+	mybar.sh)
+        choice="$HOME/Gits/xfafniros/mybar.sh"
+        vim "$choice"
+		;;
+	sxhkdrc)
+        choice="$HOME/.config/cwm/sxhkd/sxhkdrc"
+        vim "$choice"
+		;;
+	vimrc)
+        choice="$HOME/.vimrc"
+        vim "$choice"
+		;;
+	Xresources)
+        choice="$HOME/.Xresource"
+        vim "$choice"
+		;;
+	xscreensaver)
+        choice="$HOME/.xscreensaver"
+        vim "$choice"
+		;;
+	xsession)
+        choice="$HOME/.xsession"
+        vim "$choice"
+		;;
+    quit)
+        echo "Program terminated." && exit 1
+        ;;
+	*)
+		;;
+esac

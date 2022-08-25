@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Scrip to Easily get passwords form Pass and pipe them to clipboard
+# Remember to run "clrclip" to remove passwords form clipboard
+
+# stop script if any step fails
+set -eo pipefail
+
+get_service=$1
+
+if [ -z "$get_service" ]; then
+    echo "usage: getpass <service>"
+    exit 1
+fi
+
+/usr/bin/pass "$get_service" | /usr/bin/xclip -selection c
+
+/usr/bin/echo 'Remember to run "clrclip" after pasting pass to clear clipboard'
+

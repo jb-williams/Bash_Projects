@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This will clear most recent selection on clipboard
+set -eo pipefail
+
+/usr/bin/echo "" | /usr/bin/xclip -selection c
+

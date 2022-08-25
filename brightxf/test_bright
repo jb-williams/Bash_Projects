@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+basedir="/sys/class/backlight/"
+handler=$basedir$(ls $basedir)"/"
+current_bright=$(cat $handler"brightness")
+max_bright=$(cat $handler"max_brightness")
+#min_bright=30
+#min_bright=200
+#set_inc=20
+#set_inc=500
+check_min=$(($max_bright * 0.90))
+min_bright=$(($max_bright - $check_min))
+set_inc=$(($max_bright * 0.1))
+
+echo $check_min
+echo $min_bright
+echo $set_inc

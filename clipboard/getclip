@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Just a Small script to output from clipboard
+
+/usr/bin/xclip -selection c -o

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+clear
+/usr/bin/echo "Mem:"
+/usr/bin/free -h
+
+/usr/bin/echo $'\n'$"Disk:"
+/usr/bin/df -h /dev/* | /usr/bin/grep -iE "nvme|mapper|sd*" |/usr/bin/grep -vE "pts|fs" 2>/dev/null
+
+/usr/bin/echo $'\n'$"Uptime:"
+/usr/bin/uptime
+
+exit

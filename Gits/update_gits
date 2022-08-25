@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+gits_dir=$HOME"/Gits"
+pushd $gits_dir
+
+options=($(ls -d */))
+
+#choice="$(echo -e "${options[@]}\n" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first)"
+choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
+
+case "$choice" in
+	alacritty)
+    cd ~/Gits/alacritty && cargo build --release && sudo cp target/alacritty /usr/bin/ && cp target/alacritty ~/.cargo/bin/
+		;;
+	devour)
+        cd ~/Gits/devour && git pull --no-rebase && sudo make install
+	st)
+        cd ~/Gits/st-distrotube && git pull --no-rebase && sudo make install
+		;;
+	xfafniros)
+        cd ~/Gits/xfafniros && git pull --no-rebase && sudo make install
+		;;
+	xf_wiki)
+        cd ~/Gits/xf_wiki && git pull --no-rebase && sudo make install
+		;;
+    quit)
+        echo "Program terminated." && exit 1
+        ;;
+	*)
+		;;
+esac
+popd
