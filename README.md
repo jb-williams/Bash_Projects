@@ -2,7 +2,7 @@
 Different bash projects that I have made and test things with.
 
 **USE AT OWN RISK**  
-Many of these are just test projects and may only work of my devices(if I still have stuff hardcoded in there) or may break something. Many either a working progress or just unfinished.
+Many of these are just test projects and may only work of my devices(if I still have stuff hardcoded in there) or may break something. Many either a work in progress or just unfinished.
 
 * [brightxf](https://github.com/jb-williams/Bash_Projects/tree/main/brightxf)   - Work around giving easy screen brightness control in terminal or assigned to hot-key. (not finished, not dynamic)
 * [Gits](https://github.com/jb-williams/Bash_Projects/tree/main/Gits)   - A series of scripts messing with ways of keeping repos updated.
