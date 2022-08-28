@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-
+# Do not use or modify this for any malicious purpose
 echo "This is a simple file encrypter/decrypter"
 echo "Please choose what you want to do"
 
-choice="Encrypt Decrypt"
+option="Encrypt Decrypt"
 
-select option in $choice; do
+select choice in $option; do
         if [ $REPLY = 1 ];
 then
         echo "Please enter the filename you want to encrypt"
