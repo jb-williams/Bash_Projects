@@ -8,6 +8,6 @@ then
     if [ $? = 0 ]
     then
         ## laptop is not plugged in, go to sleep
-        pm-suspend
+        systemctl suspend
     fi
 fi
