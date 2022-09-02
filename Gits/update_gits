@@ -1,33 +1,62 @@
 #!/usr/bin/env bash
+#   _____  _____  _____
+# X|  ___\|  _  ||  ___\	  xfafnir
+#  | |_   | |_| || |_	   ---------------
+#  |  _|  |  _  ||  _|	    xfafnir@protonmail.com
+#  |_|    |_| |_||_|	    https://gitlab.com/xfafnir
+#  __   _  _____  _____	
+# |  \ | ||_   _||  _  |	Program:
+# | | \| |  | |  | |_|_|  
+# | |\ | | _| |_ | |\ \ 
+# |_| \__||_____||_| \_|	
 set -eo pipefail
 
 gits_dir=$HOME"/Gits"
 pushd $gits_dir
 
-options=($(ls -d */))
+#options=($(ls -d */))
 
 #choice="$(echo -e "${options[@]}\n" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first)"
-choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
+#choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
 
-case "$choice" in
-	alacritty)
-    cd ~/Gits/alacritty && cargo build --release && sudo cp target/alacritty /usr/bin/ && cp target/alacritty ~/.cargo/bin/
-		;;
-	devour)
-        cd ~/Gits/devour && git pull --no-rebase && sudo make install
-	st)
-        cd ~/Gits/st-distrotube && git pull --no-rebase && sudo make install
-		;;
-	xfafniros)
-        cd ~/Gits/xfafniros && git pull --no-rebase && sudo make install
-		;;
-	xf_wiki)
-        cd ~/Gits/xf_wiki && git pull --no-rebase && sudo make install
-		;;
-    quit)
-        echo "Program terminated." && exit 1
-        ;;
-	*)
-		;;
-esac
-popd
+#case "$choice" in
+#	alacritty)
+#        cd ~/Gits/alacritty && git pull --no-rebase && cargo build --release && sudo cp ~/Gits/alacritty/target/release/alacrittty /usr/local/bin
+#		;;
+#	devour)
+#        cd ~/Gits/devour && git pull --no-rebase && sudo make install
+#	st)
+#        cd ~/Gits/st-distrotube && git pull --no-rebase && sudo make install
+#		;;
+#	xfafniros)
+#        cd ~/Gits/xfafniros && git pull --no-rebase && sudo make install
+#		;;
+#	xf_wiki)
+#        cd ~/Gits/xf_wiki && git pull --no-rebase && sudo make install
+#		;;
+#    quit)
+#        echo "Program terminated." && exit 1
+#        ;;
+#	*)
+#		;;
+#esac
+#gits_dir=$HOME"/Gits"
+if [ -d "$gits_dir" ] ; then
+    echo "Directory %s found in Path" 
+    pushd $gits_dir
+    #diff_gits=($(ls -d */))
+    #for i in "${diff_gits[@]}"; do
+    #    cd $gits_dir"/"$i && echo $i && git pull --no-rebase
+    #done
+    diff_gits="$(exa $gits_dir | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
+    if [ "$diff_gits" = "alacritty" ]; then
+        cd "$diff_gits" && cargo build --release && cd ..
+    elif [[ $diff_gits ]]; then
+        cd "$diff_gits" && git pull --no-rebase && cd ..
+    else
+        exit
+    fi
+    popd
+else
+    echo "Directory ~/Gits is not found in Path"
+fi
