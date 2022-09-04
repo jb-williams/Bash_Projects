@@ -3,8 +3,9 @@ set -eo pipefail
 # May need to hardcode user in
 dir1="/home/'$USER'/.local/bin"
 dir2="/usr/bin"
+dir3="/usr/games"
 
-Menu="$(ls -a $dir1 $dir2 | uniq -u | fzf --prompt="Search for Program to Run : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 
+Menu="$(ls -a $dir1 $dir2 $dir3 | uniq -u | fzf --prompt="Search for Program to Run : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 
 
 exec devour "$Menu"
 

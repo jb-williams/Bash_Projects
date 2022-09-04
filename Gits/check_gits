@@ -25,7 +25,11 @@ if [ -d "$gits_dir" ] ; then
     diff_gits="$(exa $gits_dir | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
     if [[ $diff_gits ]]
     then
+<<<<<<< HEAD
         cd $gits_dir"/"$diff_gits && echo $diff_gits && git remote update && git status -uno
+=======
+        cd "$diff_gits" && git pull --no-rebase && cd ..
+>>>>>>> 995963b73a4e22efccce2f965537f229a4d5eeec
     else
         exit
     fi

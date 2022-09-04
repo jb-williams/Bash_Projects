@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
+#   _____  _____  _____
+# X|  ___\|  _  ||  ___\	  xfafnir
+#  | |_   | |_| || |_	   ---------------
+#  |  _|  |  _  ||  _|	    xfafnir@protonmail.com
+#  |_|    |_| |_||_|	    https://gitlab.com/xfafnir
+#  __   _  _____  _____	
+# |  \ | ||_   _||  _  |	Program:
+# | | \| |  | |  | |_|_|  
+# | |\ | | _| |_ | |\ \ 
+# |_| \__||_____||_| \_|	
 set -eo pipefail
 
 gits_dir=$HOME"/Gits"
 pushd $gits_dir
+<<<<<<< HEAD
 if [ -d "$gits_dir" ] ; then
     echo "Directory $gits_dir found in Path" 
     pushd $gits_dir
