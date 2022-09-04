@@ -41,7 +41,7 @@ case "$choice" in
         vim "$choice"
 		;;
 	mybar.sh)
-        choice="$HOME/Gits/xfafniros/mybar.sh"
+        choice="$HOME/mybar.sh"
         vim "$choice"
 		;;
 	sxhkdrc)

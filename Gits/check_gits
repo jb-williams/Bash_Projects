@@ -1,35 +1,13 @@
 #!/usr/bin/env bash
-#   _____  _____  _____
-# X|  ___\|  _  ||  ___\	  xfafnir
-#  | |_   | |_| || |_	   ---------------
-#  |  _|  |  _  ||  _|	    xfafnir@protonmail.com
-#  |_|    |_| |_||_|	    https://gitlab.com/xfafnir
-#  __   _  _____  _____	
-# |  \ | ||_   _||  _  |	Program:
-# | | \| |  | |  | |_|_|  
-# | |\ | | _| |_ | |\ \ 
-# |_| \__||_____||_| \_|	
 set -eo pipefail
-#pushd ~/Gits/"$1"
-#git pull --no-rebase
-#popd
-
 gits_dir=$HOME"/Gits"
 if [ -d "$gits_dir" ] ; then
     echo "Directory %s found in Path" 
     pushd $gits_dir
-    #diff_gits=($(ls -d */))
-    #for i in "${diff_gits[@]}"; do
-    #    cd $gits_dir"/"$i && echo $i && git pull --no-rebase
-    #done
     diff_gits="$(exa $gits_dir | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
     if [[ $diff_gits ]]
     then
-<<<<<<< HEAD
         cd $gits_dir"/"$diff_gits && echo $diff_gits && git remote update && git status -uno
-=======
-        cd "$diff_gits" && git pull --no-rebase && cd ..
->>>>>>> 995963b73a4e22efccce2f965537f229a4d5eeec
     else
         exit
     fi
