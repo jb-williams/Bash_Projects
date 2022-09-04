@@ -1,10 +1,6 @@
 # Brightxf
 &emsp;**!!Run at Own Risk!!**
 * No issues have come from my use of these but that doesn't mean there won't be
-* These scripts are **NOT** fully dynamic yet(on TODO's) and these values are hard-coded into [brightxf](https://github.com/jb-williams/Bash_Projects/blob/main/brightxf/brightxf):
-
-    * minimum brightness, if you don't want the screen to ever fully go black or if any negative numbers can be written to that file and cause any problems
-    * the amount to increment up/down is not dynamic yet, will try to get it 5%-10% each time, sometime.
 
 &emsp;I enjoy making/finding the most minimal gui and still be functional as a daily-driver(functional specifically to my needs). I tend to prefer cwm, a simple window manager, and sxhkd, used as a hot-key daemon, and I test my setup on a several different laptops of different specs. I have major issues getting all my "Fn"+ F keys to work properly across all my devices and just can't seem to wrap my head around any explanation I've come across(very likely just me). So, I put together these series of scripts and a systemd service file to specifically give both easy terminal control of your screen brightness as well as easily assigning hot-keys with sxhkd.
 
