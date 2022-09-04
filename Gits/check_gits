@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+#   _____  _____  _____
+# X|  ___\|  _  ||  ___\	  xfafnir
+#  | |_   | |_| || |_	   ---------------
+#  |  _|  |  _  ||  _|	    xfafnir@protonmail.com
+#  |_|    |_| |_||_|	    https://gitlab.com/xfafnir
+#  __   _  _____  _____	
+# |  \ | ||_   _||  _  |	Program:
+# | | \| |  | |  | |_|_|  
+# | |\ | | _| |_ | |\ \ 
+# |_| \__||_____||_| \_|	
 set -eo pipefail
 #pushd ~/Gits/"$1"
 #git pull --no-rebase
@@ -15,7 +25,7 @@ if [ -d "$gits_dir" ] ; then
     diff_gits="$(exa $gits_dir | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
     if [[ $diff_gits ]]
     then
-        git pull --no-rebase "$diff_gits"
+        cd $gits_dir"/"$diff_gits && echo $diff_gits && git remote update && git status -uno
     else
         exit
     fi
