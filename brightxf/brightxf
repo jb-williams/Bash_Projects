@@ -12,10 +12,6 @@ current_bright=$(cat "$handler""brightness")
 max_bright=$(cat "$handler""max_brightness")
 min_inc=$(($max_bright/10))
 perc_bright=$(( $current_bright * 100 / $max_bright ))
-#set_inc=500
-#check_min=$(($max_bright * 0.95))
-#min_bright=$(($max_bright - $check_min))
-#set_inc=$(($max_bright * 0.1))
 
 if [[ $current_bright -ge $min_inc && $current_bright -le $max_bright ]]; then
     if [[ "$1" = 'brup' && $current_bright -le $max_bright ]]; then
@@ -44,7 +40,7 @@ if [[ $current_bright -ge $min_inc && $current_bright -le $max_bright ]]; then
             fi
     elif [[ "$1" = 'brcur' ]]; then
             printf "Current Brightness %d\n%.0f%c\n" "$current_bright", "$perc_bright", "%" 2>/dev/null
-            /usr/bin/notify-send -t 3500 "$(( $current_bright * 100 / $max_bright ))%"
+            /usr/bin/notify-send -t 3500 "$perc_bright%"
     elif [[ "$1" = 'brmx' ]]; then
             printf "%d\n" "$max_bright" > "$handler""brightness"
             printf "Max Brightness %d\n%s\n" "$max_bright", "100%"
