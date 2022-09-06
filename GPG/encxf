@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Simple encrypt program
+
+selection="$(exa -a | fzf --height 95% --reverse --info hidden --prompt "ENCRYPT FILE: "  --header-first --preview ' cd_pre="$(echo $(pwd)/$(echo {}))";
+                    echo $cd_pre;
+                    echo;
+                    exa -a --color=always "${cd_pre}";
+                    termpix --width 100 --true-color {} 2>/dev/null;
+                    bat --style=numbers --theme=ansi --color=always {} 2>/dev/null' --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
+
+if [[ $selection ]]
+then
+    printf "Recipient: \n"
+    read -r recipient
+    printf "Output File: \n"
+    read -r output_file
+    if [[ $recipient && $output_file ]]
+    then
+        printf "Encrypting %s for %s.\n" "$selection", "$recipient"
+        gpg --armor --output $output_file.enc --encrypt --recipient $recipient $selection
+        read -p "Would you like to Delete Original File?:(Y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+                rm -i $selection
+            elif [[ $REPLY =~ ^[Nn]$ ]]; then
+                printf "\nNot Deleting Original File\n"
+            fi
+    else
+        printf "Error either in Selection, Recipient, Output File!\n"
+    fi
+else
+    printf "No Selection input!\n"
+fi
+#Menu="$(exa $(pwd) | uniq -u | fzf --prompt="Search for File to Encrypt : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 

@@ -8,9 +8,9 @@ if [ -d "$gits_dir" ] ; then
     pushd $gits_dir
     diff_gits="$(exa $gits_dir | fzf --prompt="Upgrade : " --border --margin=5% --color=dark --height=100% --reverse --header=" Gits " --header-first)"
     if [ "$diff_gits" = "alacritty" ]; then
-        cd "$diff_gits" && cargo build --release && cd ..
+        cd "$diff_gits" && git pull --no-rebase && cargo build --release && cd ..
     elif [[ $diff_gits ]]; then
-        cd "$diff_gits" && git pull --no-rebase && cd ..
+        cd "$diff_gits" && git pull --no-rebase && sudo make install && cd ..
     else
         exit
     fi
