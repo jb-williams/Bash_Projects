@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Simple encrypt program
 
+## the "--header-first" flag may not work on some systems ##
 selection="$(exa -a | fzf --height 95% --reverse --info hidden --prompt "ENCRYPT FILE: "  --header-first --preview ' cd_pre="$(echo $(pwd)/$(echo {}))";
                     echo $cd_pre;
                     echo;

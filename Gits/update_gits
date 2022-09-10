@@ -6,6 +6,7 @@ pushd $gits_dir
 if [ -d "$gits_dir" ] ; then
     echo "Directory $gits_dir found in Path" 
     pushd $gits_dir
+## the "--header-first" flag may not work on some systems ##
     diff_gits="$(exa $gits_dir | fzf --prompt="Upgrade : " --border --margin=5% --color=dark --height=100% --reverse --header=" Gits " --header-first)"
     if [ "$diff_gits" = "alacritty" ]; then
         cd "$diff_gits" && git pull --no-rebase && cargo build --release && cd ..

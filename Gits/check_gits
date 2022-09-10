@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 gits_dir=$HOME"/Gits"
+## the "--header-first" flag may not work on some systems ##
 if [ -d "$gits_dir" ] ; then
     echo "Directory %s found in Path" 
     pushd $gits_dir

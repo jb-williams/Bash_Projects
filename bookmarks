@@ -4,7 +4,10 @@
 
 set -eo pipefail
 file="/path/to/a/bookmarks.md"
+
+## the "--header-first" flag may not work on some systems ##
 #after cat(which changed from grep https) | awk '{print $1}' | sed -e 's/.........//' -e 's/"//' 
+#bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS ")"
 bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
 
 

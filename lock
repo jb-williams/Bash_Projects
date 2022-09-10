@@ -2,6 +2,9 @@
 ## script made to menu-nize shutdown,reboot,logout in the terminal
 set -eo pipefail
 
+## the "--header-first" flag may not work on some systems ##
+
+#Option="$(/usr/bin/echo -e "Logout\nSuspend\nShutdown\nReboot\nCancel" | /usr/bin/fzf --prompt="Please Make s Selection : " --border=rounded --margin=10% --color=dark --height 75% --reverse --header="	LOGOUT MENU " --info=hidden)"
 Option="$(/usr/bin/echo -e "Logout\nSuspend\nShutdown\nReboot\nCancel" | /usr/bin/fzf --prompt="Please Make s Selection : " --border=rounded --margin=10% --color=dark --height 75% --reverse --header="	LOGOUT MENU " --info=hidden --header-first)"
 
 case $Option in
