@@ -31,4 +31,3 @@ then
 else
     printf "No Selection input!\n"
 fi
-#Menu="$(exa $(pwd) | uniq -u | fzf --prompt="Search for File to Encrypt : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 
