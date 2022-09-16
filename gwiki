@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+ 
+pushd ~/Gits/xf_wiki/.vimwiki/
+while true;
+do
+    selection="$(grep -Hrni "$1" docs/ diary/ | awk -F ":" '{print $1}' | sort -u | fzf --height 100% --border=rounded --margin=5% --color=dark --reverse --info hidden --header-first --header="           WIKI " --prompt "Select File:" --preview ' file_pre="$(echo $(pwd)/$(echo {}))";
+            echo $file_pre;
+            echo;
+            exa -a --color=always "${file_pre}";
+            bat --style=numbers --theme=ansi --color=always {} 2>/dev/null' --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:70%)"
+    if [[ -f "$selection" ]]
+    then
+        for file in $selection; 
+        do
+            if [[ $file == *.txt ]] || [[ $file == *.sh ]] || [[ $file == *.lua ]] || [[ $file == *.conf ]] || [[ $file == .*rc ]] || [[ $file == *rc ]] || [[ $file == autostart ]]
+            then
+                vim "$selection"
+            elif [[ $file == *.docx ]] || [[ $file == *.odt ]]
+            then
+                libreoffice "$selection"
+            elif [[ $file == *.jpg ]] || [[ $file == *.png ]] 
+            then
+                sxiv "$selection"
+            elif [[ $file == *.xcf ]]
+            then
+                # change this back to gimp
+                gimp "$selection"
+                #vim "$selection"
+            else
+                vim "$selection"
+            fi
+        done
+    else
+        break
+    fi
+done
+popd
+exit
+
+    #grep -Hrni "$1" ~/.vimwiki/docs/computer/ ~/.vimwiki/diary/ | sort -u | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%

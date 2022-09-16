@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-gits_dir=$HOME"/Gits"
-pushd $gits_dir
-if [ -d "$gits_dir" ] ; then
-    echo "Directory $gits_dir found in Path" 
+while true;
+do
+    gits_dir=$HOME"/Gits"
     pushd $gits_dir
-## the "--header-first" flag may not work on some systems ##
-    diff_gits="$(exa $gits_dir | fzf --prompt="Upgrade : " --border --margin=5% --color=dark --height=100% --reverse --header=" Gits " --header-first)"
-    if [ "$diff_gits" = "alacritty" ]; then
-        cd "$diff_gits" && git pull --no-rebase && cargo build --release && cd ..
-    elif [[ $diff_gits ]]; then
-        cd "$diff_gits" && git pull --no-rebase && sudo make install && cd ..
-    else
+    if [ -d "$gits_dir" ] ; then
+        echo "Directory $gits_dir found in Path" 
+        pushd $gits_dir
+        diff_gits="$(exa $gits_dir | fzf --prompt="Upgrade : " --border --margin=5% --color=dark --height=100% --reverse --header=" Gits " --header-first)"
+        if [ "$diff_gits" = "alacritty" ]; then
+            cd "$diff_gits" && git pull --no-rebase && cargo build --release && cd ..
+        elif [[ $diff_gits ]]; then
+            cd "$diff_gits" && git pull --no-rebase && sudo make install && cd ..
+        else
+            popd
+            exit
+        fi
         exit
+    else
+        echo "Directory ~/Gits is not found in Path"
+        exit 1
+        
     fi
-    popd
-else
-    echo "Directory ~/Gits is not found in Path"
-fi
+done
+popd
+sleep 1
+exit

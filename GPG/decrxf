@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Simple encrypt program
 
-## the "--header-first" flag may not work on some systems ##
 selection="$(exa -a | fzf --height 95% --reverse --info hidden --prompt "ENCRYPT FILE: "  --header-first --preview ' cd_pre="$(echo $(pwd)/$(echo {}))";
                     echo $cd_pre;
                     echo;
@@ -25,7 +24,11 @@ then
             fi
     else
         printf "Error either in Selection, or Output File!\n"
+        exit 1
     fi
 else
     printf "No Selection input!\n"
+    exit 1
 fi
+sleep 1
+exit

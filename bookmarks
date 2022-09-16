@@ -3,17 +3,18 @@
 # keep in a markdown doc. Then it opens that url with the browser I'm using that that time
 
 set -eo pipefail
-file="/path/to/a/bookmarks.md"
-
-## the "--header-first" flag may not work on some systems ##
-#after cat(which changed from grep https) | awk '{print $1}' | sed -e 's/.........//' -e 's/"//' 
-#bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS ")"
-bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
-
-
-if [[ $bkmk ]]
-then
-    devour flatpak run io.gitlab.librewolf-community "$bkmk"
-else
-    exit
-fi
+while true;
+do
+    file="$HOME/Gits/xfafniros/resources/bookmarks.txt"
+    #after cat(which changed from grep https) | awk '{print $1}' | sed -e 's/.........//' -e 's/"//' 
+    bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
+    if [[ $bkmk ]]
+    then
+        #flatpak run io.gitlab.librewolf-community "$bkmk"
+        devour flatpak run io.gitlab.librewolf-community "$bkmk"
+    else
+        exit 1
+    fi
+done
+sleep 1
+exit

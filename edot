@@ -14,59 +14,74 @@ vimrc
 Xresources
 xscreensaver
 xsession
+bookmarks
 quit")
 
-choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first)"
-#choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
+#choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first)"
+while true;
+do
+#    choice="$(echo -e "${options[@]}" | fzf --height 100% --reverse --info hidden --header-first --header="           CONFIGS " --prompt "SELECE FILES:" --border=rounded --margin=5% --color=dark --preview ' file_pre="$(echo $(pwd)/$(echo {}))";
+#            echo $file_pre;
+#            echo;
+#            exa -a --color=always "${file_pre}";
+#            bat --style=numbers --theme=ansi --color=always {} 2>/dev/null' --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:70%)"
+    choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="           CONFIGS " --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%)"
 
-case "$choice" in
-	alacritty)
-		choice="$HOME/.config/alacritty/alacritty.yml"
-        vim "$choice"
-		;;
-	bash_aliases)
-        choice="$HOME/.bash_aliases"
-        vim "$choice"
-		;;
-	bash_personal)
-        choice="$HOME/.bash_personal"
-        vim "$choice"
-		;;
-	cwmrc)
-        choice="$HOME/.cwmrc"
-        vim "$choice"
-		;;
-	dunstrc)
-        choice="$HOME/dunst/dunstrc"
-        vim "$choice"
-		;;
-	mybar.sh)
-        choice="$HOME/mybar.sh"
-        vim "$choice"
-		;;
-	sxhkdrc)
-        choice="$HOME/.config/cwm/sxhkd/sxhkdrc"
-        vim "$choice"
-		;;
-	vimrc)
-        choice="$HOME/.vimrc"
-        vim "$choice"
-		;;
-	Xresources)
-        choice="$HOME/.Xresource"
-        vim "$choice"
-		;;
-	xscreensaver)
-        choice="$HOME/.xscreensaver"
-        vim "$choice"
-		;;
-	xsession)
-        choice="$HOME/.xsession"
-        vim "$choice"
-		;;
-    quit)
-        echo "Program terminated." && exit 1
-        ;;
-	*)
-		;;
-esac
+    case "$choice" in
+        alacritty)
+            choice="$HOME/.config/alacritty/alacritty.yml"
+            vim "$choice"
+            ;;
+        bash_aliases)
+            choice="$HOME/.bash_aliases"
+            vim "$choice"
+            ;;
+        bash_personal)
+            choice="$HOME/.bash_personal"
+            vim "$choice"
+            ;;
+        cwmrc)
+            choice="$HOME/.cwmrc"
+            vim "$choice"
+            ;;
+        dunstrc)
+            choice="$HOME/dunst/dunstrc"
+            vim "$choice"
+            ;;
+        mybar.sh)
+            choice="$HOME/mybar.sh"
+            vim "$choice"
+            ;;
+        sxhkdrc)
+            choice="$HOME/.config/cwm/sxhkd/sxhkdrc"
+            vim "$choice"
+            ;;
+        vimrc)
+            choice="$HOME/.vimrc"
+            vim "$choice"
+            ;;
+        Xresources)
+            choice="$HOME/.Xresource"
+            vim "$choice"
+            ;;
+        xscreensaver)
+            choice="$HOME/.xscreensaver"
+            vim "$choice"
+            ;;
+        xsession)
+            choice="$HOME/.xsession"
+            vim "$choice"
+            ;;
+        bookmarks)
+            choice="$HOME/path/to/bookmarks.txt"
+            vim "$choice"
+            ;;
+        quit)
+            echo "Program terminated." && exit 1
+            ;;
+        *)
+            ;;
+    esac
+done
+sleep 1
+exit

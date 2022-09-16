@@ -5,11 +5,13 @@ dir1="/home/'$USER'/.local/bin"
 dir2="/usr/bin"
 dir3="/usr/games"
 
-## the "--header-first" part might not work on some systems ###
+while true;
+do
+    Menu="$(exa $dir1 $dir2 $dir3 | uniq -u | fzf --prompt="Search for Program to Run : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 
 
-#Menu="$(exa $dir1 $dir2 $dir3 | uniq -u | fzf --prompt="Search for Program to Run : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden)" 
-Menu="$(exa $dir1 $dir2 $dir3 | uniq -u | fzf --prompt="Search for Program to Run : " --border=rounded --margin=5% --color=dark --height 100% --reverse --header="                    PROGRAMS " --info=hidden --header-first)" 
-
-exec devour "$Menu"
+    exec devour "$Menu"
+done
+sleep 1
+exit
 
 
