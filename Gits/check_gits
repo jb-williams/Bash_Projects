@@ -6,7 +6,7 @@ do
     if [ -d "$gits_dir" ] ; then
         echo "Directory %s found in Path" 
         pushd $gits_dir
-        diff_gits="$(exa $gits_dir | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
+        diff_gits="$(exa $gits_dir | fzf --prompt="Check : " --border --margin=5% --color=dark --height=100% --reverse --header=" CHECK GITS " --header-first)"
         if [[ $diff_gits ]]
         then
             cd $gits_dir"/"$diff_gits && echo $diff_gits && git remote update && git status -uno

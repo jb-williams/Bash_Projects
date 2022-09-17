@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+## the file open selection was found from Jake@Linux, as well as introducing me to fzf
  
-pushd ~/Gits/xf_wiki/.vimwiki/
+pushd ~/.vimwiki/
 while true;
 do
     selection="$(grep -Hrni "$1" docs/ diary/ | awk -F ":" '{print $1}' | sort -u | fzf --height 100% --border=rounded --margin=5% --color=dark --reverse --info hidden --header-first --header="           WIKI " --prompt "Select File:" --preview ' file_pre="$(echo $(pwd)/$(echo {}))";
@@ -36,5 +37,3 @@ do
 done
 popd
 exit
-
-    #grep -Hrni "$1" ~/.vimwiki/docs/computer/ ~/.vimwiki/diary/ | sort -u | fzf --prompt="Select a File : " --border=rounded --margin=5% --color=dark --height 100% --reverse --info=hidden --header-first --bind alt-j:preview-down,alt-k:preview-up --preview-window=right:65%

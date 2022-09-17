@@ -4,19 +4,18 @@ set -eo pipefail
 
 ## the "--header-first" flag may not work on some systems ##
 
-#Option="$(/usr/bin/echo -e "Logout\nSuspend\nShutdown\nReboot\nCancel" | /usr/bin/fzf --prompt="Please Make s Selection : " --border=rounded --margin=10% --color=dark --height 75% --reverse --header="	LOGOUT MENU " --info=hidden)"
-Option="$(/usr/bin/echo -e "Logout\nSuspend\nShutdown\nReboot\nCancel" | /usr/bin/fzf --prompt="Please Make s Selection : " --border=rounded --margin=10% --color=dark --height 75% --reverse --header="	LOGOUT MENU " --info=hidden --header-first)"
+Option="$(/usr/bin/echo -e "Shutdown\nLogout\nSuspend\nReboot\nCancel" | /usr/bin/fzf --prompt="Please Make s Selection : " --border=rounded --margin=10% --color=dark --height 75% --reverse --header="	LOGOUT MENU " --info=hidden --header-first)"
 
 case $Option in
+	Shutdown)
+		/usr/bin/doas /sbin/shutdown -h now
+		;;
 	Logout)
 #        /usr/bin/xfce4-session-logout -l       #### used this if I was using xfce4
         kill -9 -1         #### used this if I was using window-manager(CWM)
 		;;
 	Suspend)
 		/usr/bin/systemctl suspend
-		;;
-	Shutdown)
-		/usr/bin/doas /sbin/shutdown -h now
 		;;
 	Reboot)
 		/usr/bin/doas /sbin/reboot

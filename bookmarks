@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Just changed to txt to see if that was causing issues with reading the file when using key-mappings only
 # I tend to default to Markdown Syntax but this script displays a menu of urls that
 # keep in a markdown doc. Then it opens that url with the browser I'm using that that time
 
@@ -6,7 +7,6 @@ set -eo pipefail
 while true;
 do
     file="$HOME/Gits/xfafniros/resources/bookmarks.txt"
-    #after cat(which changed from grep https) | awk '{print $1}' | sed -e 's/.........//' -e 's/"//' 
     bkmk="$(bat $file | fzf --prompt="Open : " --border --margin=5% --color=dark --height=100% --reverse --header=" BOOKMARKS " --header-first)"
     if [[ $bkmk ]]
     then

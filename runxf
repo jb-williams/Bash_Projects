@@ -1,7 +1,8 @@
 #!/bin/bash
+# Basic terminal run launcher 
 set -eo pipefail
-# May need to hardcode user in
-dir1="/home/'$USER'/.local/bin"
+# May need to hard-code user in
+dir1="$HOME/.local/bin"
 dir2="/usr/bin"
 dir3="/usr/games"
 
@@ -13,5 +14,3 @@ do
 done
 sleep 1
 exit
-
-

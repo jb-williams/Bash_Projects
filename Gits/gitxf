@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # hacked together way of switching between github gitlab
-####### NEED TO CHANGE THE NAME OF THE GIT KEYS YOU USE IN THE SCRIPT########
-# stop script if any step fails
+###### Make sure to change path/to/key to your key name ######
 set -eo pipefail
 gitserv="$1"
 action="$2"

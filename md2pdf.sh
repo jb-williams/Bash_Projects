@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# quick pandoc script to format markdown docs into pdfs
 
 pandoc "$1" \
     -f gfm \

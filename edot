@@ -83,5 +83,3 @@ do
             ;;
     esac
 done
-sleep 1
-exit
