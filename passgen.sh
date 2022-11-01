@@ -3,11 +3,12 @@
 
 echo "This is a simple password generator"
 echo "Please enter the length of the password: "
-read PASS_LENGTH
+read PASSWORD_LENGTH
 
-for p in $(seq 1 5);
+# makes 5 different random passwords of specified length
+for password in $(seq 1 5);
 do
-	openssl rand -base64 48 | cut -c1-$PASS_LENGTH
+	openssl rand -base64 48 | cut -c1-$PASSWORD_LENGTH
 
 done
 
